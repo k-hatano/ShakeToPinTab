@@ -1,15 +1,15 @@
 {
 	"manifest_version": 2,
-	"name": "HightlightToPinTab",
+	"name": "GlanceToPinTab",
 	"version": "1.0",
-	"description": "HightlightToPinTab",
+	"description": "GlanceToPinTab",
      "background": {
         "scripts": ["background.js"],
     	"persistent": false
      },
 	"icons": {
-		"16": "htpt_16.png",
-		"32": "htpt_32.png"
+		"16": "gtpt_16.png",
+		"32": "gtpt_32.png"
 	},
 	"content_scripts": [
 		{
