@@ -23,3 +23,12 @@ chrome.tabs.onHighlighted.addListener( function(info){
 	lastHighlighted = info.tabIds;
 	lastHighlightedTime = date.getTime();
 });
+
+chrome.tabs.onAttached.addListener( function(tabId, info){
+	console.log("onAttached");
+	chrome.tabs.get(tabId, function(tab){
+		chrome.tabs.update(tabId, { 'pinned':false });
+	});
+}
+);
+
