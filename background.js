@@ -4,7 +4,7 @@ var lastHighlightedTime = 0;
 var lastMoved = 0;
 var lastMovedTime = 0;
 var lastMovedTimes = 0;
-var lastMovedDirection;
+var lastMovedDirection = 0;
 var lastPinnedTime = 0
 
 chrome.tabs.onHighlighted.addListener( function(info){
@@ -34,8 +34,8 @@ chrome.tabs.onMoved.addListener( function(id, info){
 	var date = new Date();
 	var tmpLastMoved = lastMoved;
 
-	if (date.getTime() - lastMovedTime < 1000 && id == lastMoved) {
-		if (lastMovedDirection != (info.fromIndex < info.toIndex)) {
+	if (date.getTime() - lastMovedTime < 2500 && id == lastMoved) {
+		if (lastMovedTimes == 0 || lastMovedDirection != (info.fromIndex < info.toIndex)) {
 			lastMovedTimes++;
 		}
 		if (lastMovedTimes >= 4) {
