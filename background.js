@@ -34,8 +34,10 @@ chrome.tabs.onMoved.addListener( function(id, info){
 	var date = new Date();
 	var tmpLastMoved = lastMoved;
 
-	if (date.getTime() - lastMovedTime < 1000 && id == lastMoved && lastMovedDirection != (info.fromIndex < info.toIndex)) {
-		lastMovedTimes++;
+	if (date.getTime() - lastMovedTime < 1000 && id == lastMoved) {
+		if (lastMovedDirection != (info.fromIndex < info.toIndex)) {
+			lastMovedTimes++;
+		}
 		if (lastMovedTimes >= 4) {
 			lastMovedTimes = 0;
 			chrome.tabs.get(tmpLastMoved, function(tab){
