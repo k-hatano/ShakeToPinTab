@@ -62,3 +62,8 @@ chrome.tabs.onAttached.addListener( function(tabId, info){
 }
 );
 
+chrome.browserAction.onClicked.addListener(function(tab) {
+	var pinned = tab.pinned;
+	chrome.tabs.update(tab.id, { 'pinned':!pinned });
+});
+
