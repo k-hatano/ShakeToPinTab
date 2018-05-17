@@ -67,3 +67,11 @@ chrome.browserAction.onClicked.addListener(function(tab) {
 	chrome.tabs.update(tab.id, { 'pinned':!pinned });
 });
 
+
+chrome.runtime.onMessage.addListener(function(req, sender, res) {
+    console.log('message received');
+    console.dir(req);
+    console.dir(sender);
+    console.dir(res);
+});
+    
