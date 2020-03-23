@@ -1,26 +1,22 @@
 {
 	"manifest_version": 2,
-	"name": "GlanceToPinTab",
+	"name": "ShakeToPinTab",
 	"version": "1.0",
-	"description": "GlanceToPinTab",
+	"description": "ShakeToPinTab",
      "background": {
         "scripts": ["background.js"],
     	"persistent": false
      },
 	"icons": {
-		"16": "gtpt_16.png",
-		"32": "gtpt_32.png"
+		"16": "stpt_16.png",
+		"32": "stpt_32.png",
+		"64": "stpt_64.png"
 	},
-	"content_scripts": [
-		{
-			"matches": ["http://*/*", "https://*/*"],
-			"js": ["content.js"],
-			"run_at":"document_end"
-		}
-	],
 	"browser_action": {
 		"default_icon": {
-			"16": "gtpt_16.png"
+			"16": "stpt_16.png",
+			"32": "stpt_32.png",
+			"64": "stpt_64.png"
 		}
 	},
 	"permissions": [

@@ -1,77 +1,34 @@
 
-var lastHighlighted = [];
-var lastHighlightedTime = 0;
-var lastMoved = 0;
-var lastMovedTime = 0;
-var lastMovedTimes = 0;
-var lastMovedDirection = 0;
-var lastPinnedTime = 0
+var movedTabs = 0;
+var movedMoment = 0;
+var movedTimes = 0;
+var movedDirection = 0;
 
-chrome.tabs.onHighlighted.addListener( function(info){
-	console.log(info.tabIds);
-	var date = new Date();
-	var tmpLastHighlighted = lastHighlighted;
+chrome.tabs.onMoved.addListener(function(id, info) {
+	var moment = new Date();
+	var tmpMovedTabs = movedTabs;
 
-	if (date.getTime() - lastHighlightedTime < 1000 && tmpLastHighlighted.length > info.tabIds.length) {
-		for (var i = 0; i < tmpLastHighlighted.length; i++) {
-			if (info.tabIds.indexOf(tmpLastHighlighted[i]) < 0) {
-				chrome.tabs.get(tmpLastHighlighted[i], function(tab){
-					var pinned = tab.pinned;
-					chrome.tabs.update(tab.id, { 'pinned':!pinned });
-					lastPinnedTime = date.getTime();
-				});
-			}
+	if (moment.getTime() - movedMoment < 2500 && id == movedTabs) {
+		if (movedTimes == 0 || movedDirection != (info.fromIndex < info.toIndex)) {
+			movedTimes++;
 		}
-	}
-
-	lastHighlighted = info.tabIds;
-	lastHighlightedTime = date.getTime();
-});
-
-chrome.tabs.onMoved.addListener( function(id, info){
-	console.log(info);
-	console.log(lastMovedTimes);
-	var date = new Date();
-	var tmpLastMoved = lastMoved;
-
-	if (date.getTime() - lastMovedTime < 2500 && id == lastMoved) {
-		if (lastMovedTimes == 0 || lastMovedDirection != (info.fromIndex < info.toIndex)) {
-			lastMovedTimes++;
-		}
-		if (lastMovedTimes >= 4) {
-			lastMovedTimes = 0;
-			chrome.tabs.get(tmpLastMoved, function(tab){
+		if (movedTimes >= 4) {
+			movedTimes = 0;
+			chrome.tabs.get(tmpMovedTabs, function(tab){
 				var pinned = tab.pinned;
 				chrome.tabs.update(tab.id, { 'pinned':!pinned });
-				lastPinnedTime = date.getTime();
 			});
 		}
 	} else {
-		lastMoved = id;
-		lastMovedTimes = 1;
+		movedTabs = id;
+		movedTimes = 1;
 	}
 
-	lastMovedDirection = (info.fromIndex < info.toIndex);
-	lastMovedTime = date.getTime();
+	movedDirection = (info.fromIndex < info.toIndex);
+	movedMoment = moment.getTime();
 });
-
-chrome.tabs.onAttached.addListener( function(tabId, info){
-	chrome.tabs.get(tabId, function(tab){
-		chrome.tabs.update(tabId, { 'pinned':false });
-	});
-}
-);
 
 chrome.browserAction.onClicked.addListener(function(tab) {
 	var pinned = tab.pinned;
 	chrome.tabs.update(tab.id, { 'pinned':!pinned });
 });
-
-
-chrome.runtime.onMessage.addListener(function(req, sender, res) {
-    console.log('message received');
-    console.dir(req);
-    console.dir(sender);
-    console.dir(res);
-});
-    
