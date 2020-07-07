@@ -1,8 +1,9 @@
 {
 	"manifest_version": 2,
-	"name": "ShakeToPinTab",
+	"name": "__MSG_appName__",
 	"version": "1.0",
-	"description": "ShakeToPinTab",
+	"default_locale": "en",
+	"description": "__MSG_appDescription__",
      "background": {
         "scripts": ["background.js"],
     	"persistent": false
@@ -23,8 +24,6 @@
 		"windows",
 		"tabs",
 		"http://*/*",
-		"https://*/*",
-		"notifications",
-		"contextMenus"
+		"https://*/*"
 	]
 }

@@ -1,0 +1,8 @@
+{
+  "appName": {
+    "message": "ShakeToPinTab"
+  },
+  "appDescription": {
+    "message": "タブを左右に動かすことによってタブを固定/固定解除することができます。"
+  }
+}
