@@ -8,7 +8,7 @@ chrome.tabs.onMoved.addListener(function(id, info) {
 	var moment = new Date();
 	var tmpMovedTabs = movedTabs;
 
-	if (moment.getTime() - movedMoment < 2500 && id == movedTabs) {
+	if (moment.getTime() - movedMoment < 2000 && id == movedTabs) {
 		if (movedTimes == 0 || movedDirection != (info.fromIndex < info.toIndex)) {
 			movedTimes++;
 		}
