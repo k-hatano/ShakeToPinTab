@@ -28,7 +28,7 @@ chrome.tabs.onMoved.addListener(function(id, info) {
 	movedMoment = moment.getTime();
 });
 
-chrome.browserAction.onClicked.addListener(function(tab) {
+chrome.action.onClicked.addListener(function(tab) {
 	var pinned = tab.pinned;
 	chrome.tabs.update(tab.id, { 'pinned':!pinned });
 });
