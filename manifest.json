@@ -1,7 +1,7 @@
 {
 	"manifest_version": 3,
 	"name": "__MSG_appName__",
-	"version": "1.0",
+	"version": "1.1",
 	"default_locale": "en",
 	"description": "__MSG_appDescription__",
     "background": {
@@ -21,10 +21,5 @@
 			"64": "stpt_64.png",
 			"128": "stpt_128.png"
 		}
-	},
-	"permissions": [
-		"windows",
-		"tabs",
-		"tabGroups"
-	]
+	}
 }
